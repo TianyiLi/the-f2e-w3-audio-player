@@ -1,26 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <sidebar></sidebar>
+    <banner></banner>
+    <div class="user">Edith Hsu</div>
+    <div class="search"></div>
+    <div class="now-playing"></div>
+    <playlist></playlist>
+    <bottom-bar></bottom-bar>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
   }
 }
 </script>
 <style lang="stylus">
+size($w, $h = $w)
+  height $h
+  width $w
+html, body
+  size 100%
+  margin 0
+  padding 0
+  display flex
+  justify-content center
+  align-items center
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+  size 1200px 800px
+.plus
+  size 16px
+  background-image url('~@/assets/plus-solid.png')
+  background-size contain
+  &:hover
+    background-image url('~@/assets/plus-solid_hover.png')
 </style>

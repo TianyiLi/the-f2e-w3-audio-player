@@ -1,5 +1,9 @@
 # the-f2e-w3-audio-player
 
+完成切版
+[使用設計稿](https://z7x2c0v0b8.github.io/the_f2e_2nd/mp3_player.html#artboard1)
+[預覽網址](https://tianyili.github.io/the-f2e-w3-audio-player)
+
 ## Project setup
 ```
 yarn install

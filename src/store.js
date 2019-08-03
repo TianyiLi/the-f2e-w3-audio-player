@@ -2,15 +2,104 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+let l = [
+  {
+    name: 'Jazz Apricot',
+    time: 60 + 52,
+    audioUrl: ''
+  },
+  {
+    name: 'Write You',
+    time: 2 * 60 + 26,
+    audioUrl: ''
+  },
+  {
+    name: 'Keys to the Apocalypse',
+    time: 4 * 60 + 3,
+    audioUrl: ''
+  },
+  {
+    name: 'A Ghost Town',
+    time: 3 * 60 + 13,
+    audioUrl: ''
+  },
+  {
+    name: 'Space Hunter',
+    time: 3 * 60 + 39,
+    audioUrl: ''
+  },
+  {
+    name: 'Ice Cream',
+    time: 2 * 60 + 3,
+    audioUrl: ''
+  }
+]
+/** @type {IAlbums} */
+let albums = [
+  {
+    name: 'Jessica',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: 'YouTube Music',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: 'November',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: 'Space Hunter',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: 'The Path Starts Here',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: 'If I Had a Chicken',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: 'They Might Not',
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: `There's Life Out`,
+    image: '',
+    list: l,
+    createFrom: ''
+  },
+  {
+    name: `Sprightly Pursuit`,
+    image: '',
+    list: l,
+    createFrom: ''
+  }
+]
 
 export default new Vuex.Store({
   state: {
     /**
      * @type {IAlbums}
      */
-    albums: [],
+    albums,
     currentAlbumsIndex: 1,
-    currentSongIndex: 1,
+    currentSongIndex: 0,
     isPlaying: false,
     isRepeat: false,
     isRandom: false,
@@ -19,10 +108,12 @@ export default new Vuex.Store({
   getters: {
     albums: state => state.albums,
     isPlaying: state => state.isPlaying,
-    playlist: state => state.albums[state.currentAlbumsIndex],
+    playlist: state => state.albums[state.currentAlbumsIndex].list,
     isRepeat: state => state.isRepeat,
     isRandom: state => state.isRandom,
-    volume: state => state.volume
+    volume: state => state.volume,
+    currentAlbumsIndex: state => state.currentAlbumsIndex,
+    currentSongIndex: state => state.currentSongIndex
   },
   mutations: {
 

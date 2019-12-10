@@ -189,4 +189,12 @@ bgc()
     background-size cover
     &.play
       background-image url('../assets/round-volume_up-24px.svg')
+.progress-bar-background
+  .drag-button
+    transition box-shadow .2s
+  &.__on-drag,
+  &:hover
+    .drag-button
+      box-shadow 0 0 10px white
+
 </style>

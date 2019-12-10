@@ -2,10 +2,11 @@
   <div class="progress-bar-wrap"
     :style="{width: ctnWidth}">
     <div class="progress-bar-background"
+      :class="isActive && '__on-drag' || ''"
       ref="ctn"
       @click.capture="onClick($event)"
-      @mousedown="mouseDown()"
-      @mouseup="mouseUp()">
+      @mousedown="mouseDown($event)"
+      @mouseup="mouseUp($event)">
       <div class="progress-bar-progress"
         :style="{transform}"></div>
       <div class="drag-button"
@@ -28,6 +29,7 @@ export default {
     return {
       isActive: false,
       x: 0,
+      mousedownX: 0,
       transform: 'translateX(0)',
       slideValue: +this.value
     }
@@ -39,6 +41,10 @@ export default {
   },
   mounted () {
     this.init()
+    window.addEventListener('mouseup', this.mouseUp, true)
+  },
+  destroyed () {
+    window.removeEventListener('mouseup', this.mouseUp, true)
   },
   methods: {
     init () {
@@ -54,19 +60,20 @@ export default {
       this.$emit('change', this.slideValue)
       this.isActive = false
     },
-    mouseDown () {
+    mouseDown (e) {
       this.isActive = true
-      this.$refs['ctn'].addEventListener('mousemove', this.move)
+      this.mousedownX = e.offsetX
+      window.addEventListener('mousemove', this.move.bind(this))
     },
     mouseUp () {
       this.isActive = false
-      this.$refs['ctn'].removeEventListener('mousemove', this.move)
+      window.removeEventListener('mousemove', this.move.bind(this))
       this.$emit('change', this.slideValue)
     },
     move (ev) {
       if (this.isActive) {
-        if (this.$refs['ctn'] !== ev.target) return
-        this.x = ev.layerX - 5 >= this.ctnWidth ? this.ctnWidth : ev.layerX - 5
+        let x = this.$refs['ctn'].getBoundingClientRect().left
+        this.x = ev.pageX - x - 5 >= this.ctnWidth - 5 ? this.ctnWidth - 5 : (ev.pageX - x - 5 < -5 ? -5 : ev.pageX - x - 5)
         this.barStyle()
       }
     },
